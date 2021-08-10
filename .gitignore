@@ -1,5 +1,0 @@
-.jshintrc
-node_modules
-package-lock.json
-package/json
-coffee.csv
