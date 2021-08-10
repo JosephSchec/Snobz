@@ -8,6 +8,10 @@ about.addEventListener('click', function (e) {
     document.getElementById('offcanvas').classList.remove('show', 'modal-backdrop');
     let backdrop = document.body.querySelector('.modal-backdrop');
     backdrop.classList.remove('show', 'modal-backdrop');
+
+    document.getElementById('search').style.visibility = 'hidden';
+    document.getElementById('search-text').style.visibility = 'hidden';
+
     let middleS = document.getElementById("size");
 
     middleS.classList.forEach(el => { middleS.classList.remove(el); });

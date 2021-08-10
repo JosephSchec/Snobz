@@ -136,8 +136,10 @@ function placePins() {
                     setLink.target = '_blank';
 
                 });
-
+                
                 let search = document.getElementById('search');
+          
+               
                 search.onclick = ((e) => {
                     e.preventDefault();
                     data.forEach(store => {
