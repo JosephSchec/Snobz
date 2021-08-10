@@ -11,10 +11,15 @@ function getCurr() {
     navigator.geolocation.getCurrentPosition(changeView);
 }
 function customView(lat, lng) {
+    
     map.setView([lat, lng], 8);
 }
 function changeView(pos) {
-    map.setView([pos.coords.latitude, pos.coords.longitude], 10);
+    if(window.innerWidth < 600){
+        map.setView([pos.coords.latitude, pos.coords.longitude], 8);
+    }else{
+        map.setView([pos.coords.latitude, pos.coords.longitude], 10);
+    }
 }
 /********* Map, Pin and ToolTip Setup  **************************/
 let L = window.L;
