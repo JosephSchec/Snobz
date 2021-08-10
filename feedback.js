@@ -68,12 +68,12 @@ feedback.addEventListener('click', () => {
     sendBtn.id = 'sendBtn';
     sendBtn.textContent = 'Send';
     modalFooter.appendChild(sendBtn);
-
+   
     sendBtn.onclick = (function () {
         Email.send({
             Host: "smtp.gmail.com",
             Username: "snobzfeed@gmail.com",
-            Password: "kyicomxpubybdzie",
+            Password: 'kyicomxpubybdzie',
             To: 'snobzfeed@gmail.com',
             From: "snobzfeed@gmail.com",
             Subject: "Heres Some Feedback",
