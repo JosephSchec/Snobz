@@ -1,20 +1,25 @@
 
 let about = document.getElementById('about');
-about.addEventListener('click', function (e) {'use strict';
+about.addEventListener('click', function (e) {
+    'use strict';
     /***Stops autoreload */
     e.preventDefault();
     /***Empty Middle */
+    document.getElementById('offcanvas').classList.remove('show', 'modal-backdrop');
+    let backdrop = document.body.querySelector('.modal-backdrop');
+    backdrop.classList.remove('show', 'modal-backdrop');
     let middleS = document.getElementById("size");
+
     middleS.classList.forEach(el => { middleS.classList.remove(el); });
     for (let i = 0; i < 7; i++) {
-        middleS.childNodes.forEach( (item)=> { middleS.removeChild(item); });
+        middleS.childNodes.forEach((item) => { middleS.removeChild(item); });
     }
     about.classList.add('active');
-    let hoke=document.getElementById('homeIcon');
+    let hoke = document.getElementById('homeIcon');
     hoke.classList.remove('active');
 
-    document.body.style.backgroundImage='none';
-    middleS.style.backgroundImage='none';
+    document.body.style.backgroundImage = 'none';
+    middleS.style.backgroundImage = 'none';
     middleS.style.backgroundColor = 'white';
     let container = document.createElement('div');
     container.className = 'container-fluid';
@@ -27,11 +32,11 @@ about.addEventListener('click', function (e) {'use strict';
     let image = document.createElement('img');
     image.src = 'images/logo.png';
     image.classList.add('m-sm-0', 'mt-sm-5', 'm-lg-5', 'p-sm-0', 'p-lg-5', 'col-md-6', 'col-lg-4');
-    image.style.filter= 'drop-shadow(-7px 4px 4px #656178)';
+    image.style.filter = 'drop-shadow(-7px 4px 4px #656178)';
     row.appendChild(image);
 
     let aboutBody = document.createElement('div');
-    aboutBody.classList.add('m-sm-0','mt-sm-5', 'm-lg-5', 'p-sm-0', 'pe-sm-3', 'col-sm-6', 'col-lg-4', 'align-self-center', 'text-center');
+    aboutBody.classList.add('m-sm-0', 'mt-sm-5', 'm-lg-5', 'p-sm-0', 'pe-sm-3', 'col-sm-6', 'col-lg-4', 'align-self-center', 'text-center');
     row.appendChild(aboutBody);
 
     let head = document.createElement('h1');
@@ -51,9 +56,9 @@ about.addEventListener('click', function (e) {'use strict';
     let returnHome = document.createElement('button');
     returnHome.textContent = 'Return To Home';
     returnHome.onclick = (() => location.href = 'index.html');
-    returnHome.classList.add('btn', 'bg-danger', 'text-light', 'w-25', 'mt-3','mb-5','m-sm-0');
+    returnHome.classList.add('btn', 'bg-danger', 'text-light', 'w-25', 'mt-3', 'mb-5', 'm-sm-0');
     aboutBody.appendChild(returnHome);
 
-    middleS.style.overflow='auto';
+    middleS.style.overflow = 'auto';
 
 });
