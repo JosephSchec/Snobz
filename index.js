@@ -136,17 +136,33 @@ function placePins() {
                     setLink.target = '_blank';
 
                 });
-                
+
                 let search = document.getElementById('search');
-          
-               
+
+
                 search.onclick = ((e) => {
                     e.preventDefault();
                     data.forEach(store => {
-                        if (store.Name.toLowerCase().trim() === document.getElementById('search-text').value.toLowerCase().trim()) {
-                            let newLat = store.LatLong.split(',')[0];
-                            let newLng = store.LatLong.split(',')[1];
-                            customView(newLat, newLng);
+                        try {
+
+
+                            if (store.Name.toLowerCase().trim() === document.getElementById('search-text').value.toLowerCase().trim()) {
+                                let newLat = store.LatLong.split(',')[0];
+                                let newLng = store.LatLong.split(',')[1];
+                                customView(newLat, newLng);
+                            }
+                            else if (store.City.toLowerCase().trim() === document.getElementById('search-text').value.toLowerCase().trim()) {
+                                let newLat = store.LatLong.split(',')[0];
+                                let newLng = store.LatLong.split(',')[1];
+                                customView(newLat, newLng);
+                            }
+                            else if (store.Region.toLowerCase().trim() === document.getElementById('search-text').value.toLowerCase().trim()) {
+                                let newLat = store.LatLong.split(',')[0];
+                                let newLng = store.LatLong.split(',')[1];
+                                customView(newLat, newLng);
+                            }
+                        } catch (err) {
+                            alert("Sorry Can't Find What You Are Looking For ... Please Check Your Spelling or Perhaps Give Feedback");
                         }
                     });
                 });
