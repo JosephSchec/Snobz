@@ -11,13 +11,13 @@ function getCurr() {
     navigator.geolocation.getCurrentPosition(changeView);
 }
 function customView(lat, lng) {
-    
+
     map.setView([lat, lng], 8);
 }
 function changeView(pos) {
-    if(window.innerWidth < 600){
+    if (window.innerWidth < 600) {
         map.setView([pos.coords.latitude, pos.coords.longitude], 8);
-    }else{
+    } else {
         map.setView([pos.coords.latitude, pos.coords.longitude], 10);
     }
 }
@@ -65,6 +65,12 @@ function placePins() {
             offCanv.id = 'offcanvasRight';
             offCanv.setAttribute('aria-labelledby', "offcanvasRightLabel");
             middle.appendChild(offCanv);
+            let closeButton = document.createElement('button');
+            closeButton.type = 'button';
+            closeButton.classList.add('btn', 'btn-close', 'top-0');
+            closeButton.setAttribute('data-bs-dismiss', 'offcanvas');
+            closeButton.setAttribute('aria-label', 'Close');
+            offCanv.appendChild(closeButton);
             /*********************Title Bar****************** */
             let offCanvHead = document.createElement('div');
             offCanvHead.classList.add('offcanvas-header', 'justify-content-center');
@@ -74,6 +80,8 @@ function placePins() {
             title.id = 'title';
             title.classList.add('text-decoration-underline');
             offCanvHead.appendChild(title);
+
+
             /****************Body****************** */
             let offCanvBody = document.createElement('div');
             offCanvBody.classList.add('offcanvas-body');
@@ -142,9 +150,10 @@ function placePins() {
 
                 });
 
+
                 let search = document.getElementById('search');
 
-
+                /***Search bar */
                 search.onclick = ((e) => {
                     e.preventDefault();
                     data.forEach(store => {
