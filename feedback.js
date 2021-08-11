@@ -73,7 +73,9 @@ feedback.addEventListener('click', () => {
     sendBtn.onclick = (function () {
         if (message.value.trim() === "") {
             alert('Textarea Cannot Be Left Blank, We Apreciate Any Feedback');
-        }
+        }else{
+
+       
         Email.send({
             Host: "smtp.gmail.com",
             Username: "snobzfeed@gmail.com",
@@ -91,7 +93,7 @@ feedback.addEventListener('click', () => {
         } document.body.removeChild(document.body.lastChild);
         sendBtn.setAttribute('data-bs-dismiss', 'modal');
         document.getElementById('offcanvas').style.visibility = 'visible';
-
+ }
     });
 
     if (modal.hasAttribute('class', 'show') && middleSection.children.length >= 3) {
