@@ -31,7 +31,9 @@ fetch("output.json")
                     cont.innerHTML = `${element.Continent}   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
                  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
                </svg>`;
-                    cont.classList.add('p-4', 'border', 'w-25', 'bg-dark', 'text-white', 'text-center', 'd-inline-block');
+                    cont.classList.add('p-4', 'border','w-50', 'bg-dark', 'text-white', 'text-center', 'd-inline-block');
+                
+
                     cont.style.height = '5em';
                     cont.style.opacity = '.95';
                     cont.style.cursor = "pointer";
@@ -61,13 +63,13 @@ fetch("output.json")
                             <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
                           </svg>`;
 
-                            region.classList.add('p-4', 'border', 'w-25', 'bg-dark', 'text-white', 'text-center', 'd-inline-block');
+                            region.classList.add('p-4', 'border', 'w-50', 'bg-dark', 'text-white', 'text-center', 'd-inline-block');
                             region.style.opacity = '.95';
                             region.style.height = '5em';
                             region.style.cursor = "pointer";
                             container.appendChild(region);
                             /**Last one in North America allowing for bottom to be higher */
-                            if (region.id === 'Wyoming') {
+                            if (region.id === 'Wyoming'||region.id === 'Wales') {
                                 let extend = document.createElement('div');
                                 extend.classList.add('p-4', 'w-25', 'd-inline-block');
                                 extend.id = 'extend';
@@ -99,7 +101,7 @@ fetch("output.json")
                                     <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
                                   </svg>`;
 
-                                    city.classList.add('p-4', 'border', 'w-25', 'bg-dark', 'text-white', 'text-center', 'd-inline-block');
+                                    city.classList.add('p-4', 'border', 'w-50', 'bg-dark', 'text-white', 'text-center', 'd-inline-block');
                                     city.style.opacity = '.95';
                                     city.style.height = '5em';
                                     city.style.cursor = "pointer";
@@ -128,7 +130,7 @@ fetch("output.json")
                                             shop.id = `${dataCity.Name}`;
                                             shop.textContent = `${dataCity.Name}`;
 
-                                            shop.classList.add('p-4', 'border', 'w-25', 'bg-dark', 'text-white', 'text-center', 'd-inline-block');
+                                            shop.classList.add('p-4', 'border', 'w-50', 'bg-dark', 'text-white', 'text-center', 'd-inline-block');
                                             shop.style.opacity = '.95';
                                             shop.style.height = '5em';
                                             shop.style.cursor = "pointer";
