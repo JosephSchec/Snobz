@@ -52,6 +52,7 @@ feedback.addEventListener('click', () => {
     modalForm.appendChild(modalFormLabel);
 
     let message = document.createElement('textarea');
+
     message.classList.add('form-control');
     message.id = 'message-text';
     message.placeholder = 'This site is awesome but it can be better by...';
@@ -68,8 +69,11 @@ feedback.addEventListener('click', () => {
     sendBtn.id = 'sendBtn';
     sendBtn.textContent = 'Send';
     modalFooter.appendChild(sendBtn);
-   
+
     sendBtn.onclick = (function () {
+        if (message.value.trim() === "") {
+            alert('Textarea Cannot Be Left Blank, We Apreciate Any Feedback');
+        }
         Email.send({
             Host: "smtp.gmail.com",
             Username: "snobzfeed@gmail.com",
