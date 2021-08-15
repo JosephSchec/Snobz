@@ -61,6 +61,11 @@ about.addEventListener('click', function (e) {
     returnHome.textContent = 'Return To Home';
     returnHome.onclick = (() => location.href = 'index.html');
     returnHome.classList.add('btn', 'bg-danger', 'text-light', 'w-25', 'mt-3', 'mb-5', 'm-sm-0');
+    if (window.innerWidth < 600) {
+        returnHome.style.visibility='hidden';
+    }else{
+        returnHome.style.visibility='visible';
+    }
     aboutBody.appendChild(returnHome);
 
     middleS.style.overflow = 'auto';
