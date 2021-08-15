@@ -11,7 +11,7 @@ function getCurr() {
     navigator.geolocation.getCurrentPosition(changeView);
 }
 function customView(lat, lng) {
-        map.setView([lat, lng], 8);
+    map.setView([lat, lng], 8);
 }
 function changeView(pos) {
     if (window.innerWidth < 600) {
@@ -191,8 +191,13 @@ function placePins() {
 /************* After Loading Pins And Get Location     ************************/
 placePins();
 getCurr();
-
-
+if (window.innerWidth < 600) {
+    let controller = document.querySelector('.leaflet-control-container');
+    controller.style.visibility = 'hidden';
+} else {
+    let topControl = document.querySelector('.leaflet-top');
+    topControl.classList.add('mt-5', 'pt-3');
+}
 
 
 let mapIcon = document.getElementById('mapIcon');
