@@ -11,8 +11,7 @@ function getCurr() {
     navigator.geolocation.getCurrentPosition(changeView);
 }
 function customView(lat, lng) {
-
-    map.setView([lat, lng], 8);
+        map.setView([lat, lng], 8);
 }
 function changeView(pos) {
     if (window.innerWidth < 600) {
@@ -22,17 +21,18 @@ function changeView(pos) {
     }
 }
 /********* Map, Pin and ToolTip Setup  **************************/
+
 let L = window.L;
 let map = L.map('map', {
     center: [usLat, usLng],
-    zoom: 5,
+    zoom: 3,
     maxBounds: [
         [-90, -180],
         [90, 180]
     ]
 });
 map.setMinZoom(3);
-map.setMaxZoom(15);
+map.setMaxZoom(17);
 getCurr();
 var layer = new L.tileLayer(/*"https://api.maptiler.com/maps/streets/256/{z}/{x}/{y}.png?key=l0Cgdm8UqMhiSQyp5Ov7"*/
     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
