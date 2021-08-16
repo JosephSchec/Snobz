@@ -77,7 +77,7 @@ feedback.addEventListener('click', () => {
         }else{
 
        
-        Email.send({
+        window.Email.send({
             Host: "smtp.gmail.com",
             Username: "snobzfeed@gmail.com",
             Password: 'kyicomxpubybdzie',
