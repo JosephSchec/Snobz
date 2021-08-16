@@ -1,7 +1,7 @@
-
+(function () {
+    'use strict';
 let about = document.getElementById('about');
 about.addEventListener('click', function (e) {
-    'use strict';
     /***Stops autoreload */
     e.preventDefault();
     /***Empty Middle */
@@ -70,4 +70,4 @@ about.addEventListener('click', function (e) {
 
     middleS.style.overflow = 'auto';
 
-});
+});}());
