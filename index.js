@@ -159,19 +159,9 @@
                         e.preventDefault();
                         data.forEach(store => {
                             try {
-
-
-                                if (store.Name.toLowerCase().trim() === document.getElementById('search-text').value.toLowerCase().trim()) {
-                                    let newLat = store.LatLong.split(',')[0];
-                                    let newLng = store.LatLong.split(',')[1];
-                                    customView(newLat, newLng);
-                                }
-                                else if (store.City.toLowerCase().trim() === document.getElementById('search-text').value.toLowerCase().trim()) {
-                                    let newLat = store.LatLong.split(',')[0];
-                                    let newLng = store.LatLong.split(',')[1];
-                                    customView(newLat, newLng);
-                                }
-                                else if (store.Region.toLowerCase().trim() === document.getElementById('search-text').value.toLowerCase().trim()) {
+                                if (store.Name.toLowerCase().trim() === document.getElementById('search-text').value.toLowerCase().trim()||
+                                store.City.toLowerCase().trim() === document.getElementById('search-text').value.toLowerCase().trim()||
+                                store.Region.toLowerCase().trim() === document.getElementById('search-text').value.toLowerCase().trim()) {
                                     let newLat = store.LatLong.split(',')[0];
                                     let newLng = store.LatLong.split(',')[1];
                                     customView(newLat, newLng);
