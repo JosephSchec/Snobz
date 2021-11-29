@@ -1,4 +1,4 @@
-(function () {
+( function () {
     'use strict';
 
     // marker.bindPopup("popupContent").openPopup();
@@ -51,132 +51,134 @@
 
 
     /*************** create pin and tooltip for each item in json *******************/
-    function placePins() {
+    async function placePins() {
         document.getElementById('homeIcon').classList.add('active');
-        fetch("output.json")
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (data) {
-                let middle = document.getElementById("map");
+        const output = await fetch("output.json");
+        try {
+            if (!output.ok) {
+                throw new Error('NOT OK OUTPUT.JSON');
+            }
+            const data =  await output.json();
 
-                let offCanv = document.createElement('div');
-                offCanv.classList.add('offcanvas', 'offcanvas-end', 'pt-5');
-                offCanv.tabIndex = -1;
-                offCanv.id = 'offcanvasRight';
-                offCanv.setAttribute('aria-labelledby', "offcanvasRightLabel");
-                middle.appendChild(offCanv);
-                let closeButton = document.createElement('button');
-                closeButton.type = 'button';
-                closeButton.classList.add('btn', 'btn-close', 'top-0');
-                closeButton.setAttribute('data-bs-dismiss', 'offcanvas');
-                closeButton.setAttribute('aria-label', 'Close');
-                offCanv.appendChild(closeButton);
-                /*********************Title Bar****************** */
-                let offCanvHead = document.createElement('div');
-                offCanvHead.classList.add('offcanvas-header', 'justify-content-center');
-                offCanv.appendChild(offCanvHead);
+            let middle = document.getElementById("map");
 
-                let title = document.createElement('h1');
-                title.id = 'title';
-                title.classList.add('text-decoration-underline');
-                offCanvHead.appendChild(title);
+            let offCanv = document.createElement('div');
+            offCanv.classList.add('offcanvas', 'offcanvas-end', 'pt-5');
+            offCanv.tabIndex = -1;
+            offCanv.id = 'offcanvasRight';
+            offCanv.setAttribute('aria-labelledby', "offcanvasRightLabel");
+            middle.appendChild(offCanv);
+            let closeButton = document.createElement('button');
+            closeButton.type = 'button';
+            closeButton.classList.add('btn', 'btn-close', 'top-0');
+            closeButton.setAttribute('data-bs-dismiss', 'offcanvas');
+            closeButton.setAttribute('aria-label', 'Close');
+            offCanv.appendChild(closeButton);
+            /*********************Title Bar****************** */
+            let offCanvHead = document.createElement('div');
+            offCanvHead.classList.add('offcanvas-header', 'justify-content-center');
+            offCanv.appendChild(offCanvHead);
 
-
-                /****************Body****************** */
-                let offCanvBody = document.createElement('div');
-                offCanvBody.classList.add('offcanvas-body');
-                offCanv.appendChild(offCanvBody);
-
-                /**********Image */
-                let img = document.createElement('img');
-                img.width = '150';
-                img.id = 'img';
-
-                offCanvBody.appendChild(img);
-
-                /********City********* */
-                let city = document.createElement('p');
-                city.id = 'city';
-                city.classList.add('fs-3', 'd-block');
-                offCanvBody.appendChild(city);
-
-                /****Region********* */
-                let region = document.createElement('p');
-                region.id = 'region';
-                region.classList.add('fs-3', 'd-block');
-                offCanvBody.appendChild(region);
-
-                /***Continent****** */
-                let continent = document.createElement('p');
-                continent.id = 'continent';
-                continent.classList.add('fs-3', 'd-block');
-                offCanvBody.appendChild(continent);
-                /********Link********* */
-                let link = document.createElement('a');
-                link.classList.add('fs-3', 'd-inline-block');
-                link.id = 'link';
-                offCanvBody.appendChild(link);
-
-                data.forEach(element => {
-                    let lat = element.LatLong.split(',')[0];
-                    let lng = element.LatLong.split(',')[1];
-                    let coffeePin = createPin(Number(lat), Number(lng));
-                    let setPin = createTool(coffeePin, element.Name);
-                    let clicked = setPin.getElement();
-                    clicked.setAttribute('data-bs-toggle', 'offcanvas');
-                    clicked.setAttribute('data-bs-target', '#offcanvasRight');
-                    clicked.setAttribute('aria-controls', 'offcanvasRight');
-
-                    clicked.addEventListener('click', function () {
-                        let setT = document.getElementById('title');
-                        setT.innerText = `${element.Name}`;
-
-                        let setImg = document.getElementById('img');
-                        setImg.src = `${element.Logo}`;
-
-                        let setCity = document.getElementById('city');
-                        setCity.innerHTML = `<span>City : </span> <br/> ${element.City}`;
-
-                        let setRe = document.getElementById('region');
-                        setRe.innerHTML = `<span>State/ Province/ Country : </span> <br/> ${element.Region}`;
-
-                        let setCont = document.getElementById('continent');
-                        setCont.innerHTML = `<span>Continent : </span> <br/> ${element.Continent}<br/><br/><span>Link : </span> `;
-
-                        let setLink = document.getElementById('link');
-                        setLink.innerHTML = (` ${element.Name}`);
-                        setLink.href = `${element.Link}`;
-                        setLink.target = '_blank';
-
-                    });
+            let title = document.createElement('h1');
+            title.id = 'title';
+            title.classList.add('text-decoration-underline');
+            offCanvHead.appendChild(title);
 
 
-                    let search = document.getElementById('search');
+            /****************Body****************** */
+            let offCanvBody = document.createElement('div');
+            offCanvBody.classList.add('offcanvas-body');
+            offCanv.appendChild(offCanvBody);
 
-                    /***Search bar */
-                    search.onclick = ((e) => {
-                        e.preventDefault();
-                        data.forEach(store => {
-                            try {
-                                const searchElem = document.getElementById('search-text').value.toLowerCase().trim();
-                                if (store.Name.toLowerCase().trim() === searchElem ||
-                                    store.City.toLowerCase().trim() === searchElem ||
-                                    store.Region.toLowerCase().trim() === searchElem) {
-                                    let newLat = store.LatLong.split(',')[0];
-                                    let newLng = store.LatLong.split(',')[1];
-                                    customView(newLat, newLng);
-                                }
-                            } catch (err) {
-                                alert("Sorry Can't Find What You Are Looking For ... Please Check Your Spelling or Perhaps Give Feedback");
+            /**********Image */
+            let img = document.createElement('img');
+            img.width = '150';
+            img.id = 'img';
+
+            offCanvBody.appendChild(img);
+
+            /********City********* */
+            let city = document.createElement('p');
+            city.id = 'city';
+            city.classList.add('fs-3', 'd-block');
+            offCanvBody.appendChild(city);
+
+            /****Region********* */
+            let region = document.createElement('p');
+            region.id = 'region';
+            region.classList.add('fs-3', 'd-block');
+            offCanvBody.appendChild(region);
+
+            /***Continent****** */
+            let continent = document.createElement('p');
+            continent.id = 'continent';
+            continent.classList.add('fs-3', 'd-block');
+            offCanvBody.appendChild(continent);
+            /********Link********* */
+            let link = document.createElement('a');
+            link.classList.add('fs-3', 'd-inline-block');
+            link.id = 'link';
+            offCanvBody.appendChild(link);
+
+            data.forEach(element => {
+                let lat = element.LatLong.split(',')[0];
+                let lng = element.LatLong.split(',')[1];
+                let coffeePin = createPin(Number(lat), Number(lng));
+                let setPin = createTool(coffeePin, element.Name);
+                let clicked = setPin.getElement();
+                clicked.setAttribute('data-bs-toggle', 'offcanvas');
+                clicked.setAttribute('data-bs-target', '#offcanvasRight');
+                clicked.setAttribute('aria-controls', 'offcanvasRight');
+
+                clicked.addEventListener('click', function () {
+                    let setT = document.getElementById('title');
+                    setT.innerText = `${element.Name}`;
+
+                    let setImg = document.getElementById('img');
+                    setImg.src = `${element.Logo}`;
+
+                    let setCity = document.getElementById('city');
+                    setCity.innerHTML = `<span>City : </span> <br/> ${element.City}`;
+
+                    let setRe = document.getElementById('region');
+                    setRe.innerHTML = `<span>State/ Province/ Country : </span> <br/> ${element.Region}`;
+
+                    let setCont = document.getElementById('continent');
+                    setCont.innerHTML = `<span>Continent : </span> <br/> ${element.Continent}<br/><br/><span>Link : </span> `;
+
+                    let setLink = document.getElementById('link');
+                    setLink.innerHTML = (` ${element.Name}`);
+                    setLink.href = `${element.Link}`;
+                    setLink.target = '_blank';
+
+                });
+
+
+                let search = document.getElementById('search');
+
+                /***Search bar */
+                search.onclick = ((e) => {
+                    e.preventDefault();
+                    data.forEach(store => {
+                        try {
+                            const searchElem = document.getElementById('search-text').value.toLowerCase().trim();
+                            if (store.Name.toLowerCase().trim() === searchElem ||
+                                store.City.toLowerCase().trim() === searchElem ||
+                                store.Region.toLowerCase().trim() === searchElem) {
+                                let newLat = store.LatLong.split(',')[0];
+                                let newLng = store.LatLong.split(',')[1];
+                                customView(newLat, newLng);
                             }
-                        });
+                        } catch (err) {
+                            alert("Sorry Can't Find What You Are Looking For ... Please Check Your Spelling or Perhaps Give Feedback");
+                        }
                     });
                 });
-            })
-            .catch(function (err) {
-                console.log(err);
             });
+        }
+        catch (err) {
+            console.log(err);
+        }
     }
 
 
