@@ -1,4 +1,4 @@
-( function () {
+(async function () {
     'use strict';
 
     // marker.bindPopup("popupContent").openPopup();
@@ -36,9 +36,12 @@
     map.setMaxZoom(17);
     getCurr();
     var layer = new L.tileLayer(/*"https://api.maptiler.com/maps/streets/256/{z}/{x}/{y}.png?key=l0Cgdm8UqMhiSQyp5Ov7"*/
-        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        noWrap: true,
-    });
+        /*"https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png" */
+        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            noWrap: true,
+        });
     layer.addTo(map);
 
 
@@ -58,7 +61,7 @@
             if (!output.ok) {
                 throw new Error('NOT OK OUTPUT.JSON');
             }
-            const data =  await output.json();
+            const data = await output.json();
 
             let middle = document.getElementById("map");
 
@@ -68,12 +71,16 @@
             offCanv.id = 'offcanvasRight';
             offCanv.setAttribute('aria-labelledby', "offcanvasRightLabel");
             middle.appendChild(offCanv);
-            let closeButton = document.createElement('button');
-            closeButton.type = 'button';
-            closeButton.classList.add('btn', 'btn-close', 'top-0');
-            closeButton.setAttribute('data-bs-dismiss', 'offcanvas');
-            closeButton.setAttribute('aria-label', 'Close');
-            offCanv.appendChild(closeButton);
+
+            if (window.innerWidth < 600) {
+                let closeButton = document.createElement('button');
+                closeButton.type = 'button';
+                closeButton.classList.add('btn', 'btn-close', 'top-0');
+                closeButton.setAttribute('data-bs-dismiss', 'offcanvas');
+                closeButton.setAttribute('aria-label', 'Close');
+                offCanv.appendChild(closeButton);
+            }
+
             /*********************Title Bar****************** */
             let offCanvHead = document.createElement('div');
             offCanvHead.classList.add('offcanvas-header', 'justify-content-center');
@@ -183,7 +190,7 @@
 
 
     /************* After Loading Pins And Get Location     ************************/
-    placePins();
+    await placePins();
     getCurr();
     if (window.innerWidth < 600) {
         let controller = document.querySelector('.leaflet-control-container');
@@ -195,8 +202,8 @@
 
 
     let mapIcon = document.getElementById('mapIcon');
-    mapIcon.addEventListener('click', function () {
-        placePins();
+    mapIcon.addEventListener('click', async  ()=> {
+        await placePins();
         getCurr();
     });
 }());

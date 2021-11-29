@@ -5,10 +5,10 @@
     feedback.setAttribute('data-bs-target', '#modalId');
     let middleSection = document.getElementById('size');
 
-    feedback.addEventListener('click', () => {
-
+    feedback.addEventListener('click', (e) => {
+        e.preventDefault();
         let modal = document.createElement('div');
-        modal.classList.add('modal', 'fade');
+        modal.classList.add('modal', 'fade', 'show');
         modal.id = 'modalId';
         modal.setAttribute('aria-hidden', 'true');
         modal.tabIndex = '-1';
@@ -92,12 +92,13 @@
                 for (let i = 0; i < 2; i++) {
                     middleSection.removeChild(middleSection.lastChild);
                 } document.body.removeChild(document.body.lastChild);
+
                 sendBtn.setAttribute('data-bs-dismiss', 'modal');
                 document.getElementById('offcanvas').style.visibility = 'visible';
             }
         });
 
-        if (modal.hasAttribute('class', 'show') && middleSection.children.length >= 3) {
+        if (modal.hasAttribute('class', 'show') && middleSection.children.length > 3) {
             document.getElementById('offcanvas').style.visibility = 'hidden';
         }
 
