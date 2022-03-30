@@ -3,7 +3,7 @@ After a 3 week break from class I have completed my first project . Welcome to S
 
 ### - visit [Snobz](snobz.vercel.app)
 
-Due to vercel not reading js files in seperate folder this repository may seem messy:
+#### Due to vercel not reading js files in seperate folder this repository may seem messy:
   * Index.html = template
   * Index.js = setting up the map
   * LoadOutput.js = parses csv file to json
